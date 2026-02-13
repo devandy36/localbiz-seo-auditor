@@ -8,9 +8,11 @@
       name="description"
       content="Auditoria rápida de SEO técnico, acessibilidade e sinais iniciais de performance."
     />
-    <link rel="stylesheet" href="./src/css/base.css" />
-    <link rel="stylesheet" href="./src/css/layout.css" />
-    <link rel="stylesheet" href="./src/css/components.css" />
+
+    <!-- CSS (GitHub Pages OK) -->
+    <link rel="stylesheet" href="src/css/base.css" />
+    <link rel="stylesheet" href="src/css/layout.css" />
+    <link rel="stylesheet" href="src/css/components.css" />
   </head>
 
   <body>
@@ -42,8 +44,8 @@
           <h2 class="card-title">O que este projeto faz</h2>
           <p class="card-text">
             Você informa uma URL e recebe um resumo estruturado com recomendações iniciais.
-            Neste Sprint, a análise é <strong>mockada</strong> para validar interface, estado e acessibilidade
-            antes da integração real (CORS / proxy no Sprint 2).
+            Neste Sprint, a análise é <strong>mockada</strong> para validar interface, estado e
+            acessibilidade antes da integração real (CORS / proxy no Sprint 2).
           </p>
 
           <ul class="list">
@@ -68,9 +70,7 @@
 
       <section id="audit" class="card card-accent">
         <h2 class="card-title">Rodar auditoria</h2>
-        <p class="card-text muted">
-          Exemplo: https://www.seusite.com.br
-        </p>
+        <p class="card-text muted">Exemplo: https://www.seusite.com.br</p>
 
         <form id="auditForm" class="form" novalidate>
           <label class="label" for="urlInput">URL do site</label>
@@ -130,19 +130,20 @@
             <ul id="recoList" class="list"></ul>
 
             <div class="actions">
-              <button id="resetBtn" class="btn btn-ghost" type="button">Nova auditoria</button>
+              <button id="resetBtn" class="btn btn-ghost" type="button">
+                Nova auditoria
+              </button>
             </div>
           </div>
         </div>
       </section>
 
       <footer class="footer">
-        <p class="muted">
-          LocalBiz SEO Auditor • Sprint 1 • Projeto de portfólio
-        </p>
+        <p class="muted">LocalBiz SEO Auditor • Sprint 1 • Projeto de portfólio</p>
       </footer>
     </main>
 
-    <script type="module" src="./src/js/main.js"></script>
+    <!-- JS (GitHub Pages OK) -->
+    <script type="module" src="src/js/main.js"></script>
   </body>
 </html>
