@@ -1,101 +1,76 @@
-// src/js/modules/ui.js
-import { getUrlErrorMessage, normalizeUrl } from "../utils/validate.js";
+import { resetToIdle } from "../state/store.js";
 
-export function bindUI({ onSubmit }) {
-  const form = document.querySelector("#auditForm");
-  const urlInput = document.querySelector("#url");
-  const errorEl = document.querySelector("#errorMessage");
-  const resultsEl = document.querySelector("#results");
+const $ = (sel) => document.querySelector(sel);
 
-  const btn = document.querySelector("#runAudit");
-  const statusPill = document.querySelector("#statusPill");
+const form = $("#auditForm");
+const input = $("#urlInput");
+const errorEl = $("#urlError");
+const statusText = $("#statusText");
+const results = $("#results");
+const scorePill = $("#scorePill");
 
-  function setError(message) {
-    if (!errorEl) return;
-    errorEl.textContent = message || "";
-    errorEl.hidden = !message;
-  }
+const seoSummary = $("#seoSummary");
+const a11ySummary = $("#a11ySummary");
+const perfSummary = $("#perfSummary");
+const recoList = $("#recoList");
 
-  function setStatus(status) {
-    if (!statusPill) return;
-    statusPill.textContent =
-      status === "loading"
-        ? "Analisando…"
-        : status === "success"
-        ? "Concluído"
-        : status === "error"
-        ? "Erro"
-        : "Pronto";
-  }
+const resetBtn = $("#resetBtn");
 
-  function setButtonLoading(isLoading) {
-    if (!btn) return;
-    btn.disabled = isLoading;
-    btn.textContent = isLoading ? "Auditando…" : "Auditar";
-  }
-
-  function showResults(show) {
-    if (!resultsEl) return;
-    resultsEl.hidden = !show;
-  }
-
-  form?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const raw = urlInput?.value ?? "";
-    const normalized = normalizeUrl(raw);
-    const msg = getUrlErrorMessage(raw);
-
-    if (msg) {
-      setError(msg);
-      showResults(false);
-      return;
-    }
-
-    setError("");
-    setStatus("loading");
-    setButtonLoading(true);
-
-    try {
-      await onSubmit(normalized);
-      setStatus("success");
-    } catch (err) {
-      setStatus("error");
-      setError("Falha ao auditar. Tente novamente.");
-      throw err;
-    } finally {
-      setButtonLoading(false);
-    }
+export function bindReset() {
+  resetBtn?.addEventListener("click", () => {
+    if (input) input.value = "";
+    resetToIdle();
+    input?.focus();
   });
-
-  // helpers que o main.js vai usar
-  return {
-    setError,
-    setStatus,
-    setButtonLoading,
-    showResults,
-  };
 }
 
-export function renderResults(results) {
-  // resultados resumidos
-  const seoSummary = document.querySelector("#seoSummary");
-  const allySummary = document.querySelector("#allySummary");
-  const perfSummary = document.querySelector("#perfSummary");
+export function showFieldError(message) {
+  if (!errorEl) return;
+  errorEl.textContent = message;
+  errorEl.hidden = !message;
 
-  if (seoSummary) seoSummary.textContent = results?.seo?.summary ?? "—";
-  if (allySummary) allySummary.textContent = results?.a11y?.summary ?? "—";
-  if (perfSummary) perfSummary.textContent = results?.perf?.summary ?? "—";
+  if (message) {
+    input?.setAttribute("aria-invalid", "true");
+  } else {
+    input?.removeAttribute("aria-invalid");
+  }
+}
 
-  // lista de recomendações
-  const list = document.querySelector("#recommendations");
-  if (list) {
-    list.innerHTML = "";
-    const items = results?.recommendations ?? [];
-    for (const r of items) {
+export function render(state) {
+  const { status, errorMessage, result } = state;
+
+  // erro de validação / app
+  showFieldError(status === "error" ? errorMessage : "");
+
+  if (statusText) {
+    if (status === "idle") statusText.textContent = "Pronto para auditar.";
+    if (status === "loading") statusText.textContent = "Auditando… (mock do Sprint 1)";
+    if (status === "error") statusText.textContent = "Corrija a URL e tente novamente.";
+    if (status === "success") statusText.textContent = "Auditoria concluída.";
+  }
+
+  if (!results) return;
+
+  if (status !== "success" || !result) {
+    results.hidden = true;
+    if (scorePill) scorePill.textContent = "Score: --";
+    return;
+  }
+
+  results.hidden = false;
+
+  if (scorePill) scorePill.textContent = `Score: ${result.score}`;
+
+  if (seoSummary) seoSummary.textContent = result.summaries?.seo ?? "—";
+  if (a11ySummary) a11ySummary.textContent = result.summaries?.a11y ?? "—";
+  if (perfSummary) perfSummary.textContent = result.summaries?.perf ?? "—";
+
+  if (recoList) {
+    recoList.innerHTML = "";
+    for (const item of result.recommendations ?? []) {
       const li = document.createElement("li");
-      li.textContent = r;
-      list.appendChild(li);
+      li.textContent = item;
+      recoList.appendChild(li);
     }
   }
 }

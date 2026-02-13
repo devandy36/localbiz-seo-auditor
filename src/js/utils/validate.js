@@ -1,14 +1,9 @@
-// src/js/utils/validate.js
-
 export function normalizeUrl(input) {
   const raw = String(input ?? "").trim();
-
   if (!raw) return "";
 
-  // Se a pessoa digitar "google.com", vira "https://google.com"
-  if (!/^https?:\/\//i.test(raw)) {
-    return `https://${raw}`;
-  }
+  // se não tiver http/https, assume https
+  if (!/^https?:\/\//i.test(raw)) return `https://${raw}`;
 
   return raw;
 }
@@ -16,9 +11,7 @@ export function normalizeUrl(input) {
 export function isValidUrl(urlString) {
   try {
     const url = new URL(urlString);
-    const okProtocol = url.protocol === "http:" || url.protocol === "https:";
-    const okHost = Boolean(url.hostname);
-    return okProtocol && okHost;
+    return url.protocol === "http:" || url.protocol === "https:";
   } catch {
     return false;
   }
@@ -32,6 +25,3 @@ export function getUrlErrorMessage(input) {
 
   return "";
 }
-
-
-
