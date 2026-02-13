@@ -1,3 +1,4 @@
+chore: finalize README + polish UI
 # VisiScan
 
 Auditoria rápida de SEO técnico, acessibilidade e sinais iniciais de performance — feita para quem precisa enxergar problemas óbvios antes de partir para otimizações mais pesadas.
