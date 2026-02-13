@@ -1,4 +1,4 @@
-# LocalBiz SEO Auditor
+visiscan
 
 Aplicação web para auditoria rápida de **SEO técnico**, **acessibilidade** e **sinais iniciais de performance**, com relatório estruturado e recomendações acionáveis.
 
@@ -62,3 +62,4 @@ O planejamento por etapas está em `docs/roadmap.md`.
 
 ## Autor
 Desenvolvido por Andressa Duarte.
+
