@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>LocalBiz SEO Auditor</title>
+
+    <title>VisiScan • SEO Audit</title>
+
     <meta
       name="description"
       content="Auditoria rápida de SEO técnico, acessibilidade e sinais iniciais de performance."
@@ -22,7 +24,7 @@
       <div class="container header-grid">
         <div>
           <p class="badge">Sprint 1</p>
-          <h1 class="title">LocalBiz SEO Auditor</h1>
+          <h1 class="title">VisiScan</h1>
           <p class="subtitle">
             Auditoria rápida de <strong>SEO técnico</strong>, <strong>acessibilidade</strong> e
             sinais iniciais de <strong>performance</strong>.
@@ -30,9 +32,15 @@
         </div>
 
         <div class="header-actions">
-          <a class="btn btn-ghost" href="./README.md" target="_blank" rel="noreferrer">
+          <a
+            class="btn btn-ghost"
+            href="https://github.com/devandy36/localbiz-seo-auditor"
+            target="_blank"
+            rel="noreferrer"
+          >
             Ver README
           </a>
+
           <a class="btn btn-primary" href="#audit">Iniciar auditoria</a>
         </div>
       </div>
@@ -44,8 +52,8 @@
           <h2 class="card-title">O que este projeto faz</h2>
           <p class="card-text">
             Você informa uma URL e recebe um resumo estruturado com recomendações iniciais.
-            Neste Sprint, a análise é <strong>mockada</strong> para validar interface, estado e
-            acessibilidade antes da integração real (CORS / proxy no Sprint 2).
+            Neste Sprint, a análise é <strong>mockada</strong> para validar interface, estado e acessibilidade
+            antes da integração real (CORS / proxy no Sprint 2).
           </p>
 
           <ul class="list">
@@ -70,80 +78,7 @@
 
       <section id="audit" class="card card-accent">
         <h2 class="card-title">Rodar auditoria</h2>
-        <p class="card-text muted">Exemplo: https://www.seusite.com.br</p>
+        <p class="card-text muted">Exemplo: https:
 
-        <form id="auditForm" class="form" novalidate>
-          <label class="label" for="urlInput">URL do site</label>
 
-          <div class="field-row">
-            <input
-              id="urlInput"
-              name="url"
-              class="input"
-              type="url"
-              inputmode="url"
-              placeholder="https://..."
-              aria-describedby="urlHelp urlError"
-              required
-            />
-            <button id="auditButton" class="btn btn-primary" type="submit">
-              Auditar
-            </button>
-          </div>
-
-          <p id="urlHelp" class="help">
-            Dica: cole a URL completa com <strong>https://</strong>.
-          </p>
-
-          <p id="urlError" class="error" role="alert" hidden></p>
-
-          <div class="status" aria-live="polite" aria-atomic="true">
-            <span id="statusText" class="muted">Pronto para auditar.</span>
-          </div>
-        </form>
-
-        <div id="results" class="results" hidden>
-          <div class="results-header">
-            <h3 class="results-title">Resultado</h3>
-            <div class="pill" id="scorePill" aria-label="Pontuação do site">Score: --</div>
-          </div>
-
-          <div class="grid three-cols">
-            <div class="card mini">
-              <h4 class="mini-title">SEO Técnico</h4>
-              <p class="mini-text" id="seoSummary">—</p>
-            </div>
-
-            <div class="card mini">
-              <h4 class="mini-title">Acessibilidade</h4>
-              <p class="mini-text" id="a11ySummary">—</p>
-            </div>
-
-            <div class="card mini">
-              <h4 class="mini-title">Performance</h4>
-              <p class="mini-text" id="perfSummary">—</p>
-            </div>
-          </div>
-
-          <div class="card">
-            <h4 class="card-title">Recomendações iniciais</h4>
-            <ul id="recoList" class="list"></ul>
-
-            <div class="actions">
-              <button id="resetBtn" class="btn btn-ghost" type="button">
-                Nova auditoria
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <footer class="footer">
-        <p class="muted">LocalBiz SEO Auditor • Sprint 1 • Projeto de portfólio</p>
-      </footer>
-    </main>
-
-    <!-- JS (GitHub Pages OK) -->
-    <script type="module" src="src/js/main.js"></script>
-  </body>
-</html>
+  
