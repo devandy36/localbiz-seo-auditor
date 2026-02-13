@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
 
     <title>VisiScan • SEO Audit</title>
-
     <meta
       name="description"
       content="Auditoria rápida de SEO técnico, acessibilidade e sinais iniciais de performance."
     />
 
-    <!-- CSS (GitHub Pages OK) -->
-    <link rel="stylesheet" href="src/css/base.css" />
-    <link rel="stylesheet" href="src/css/layout.css" />
-    <link rel="stylesheet" href="src/css/components.css" />
+    <!-- CSS (GitHub Pages OK: sem / no começo) -->
+    <link rel="stylesheet" href="./src/css/base.css" />
+    <link rel="stylesheet" href="./src/css/layout.css" />
+    <link rel="stylesheet" href="./src/css/components.css" />
   </head>
 
   <body>
@@ -31,16 +30,8 @@
           </p>
         </div>
 
+        <!-- ✅ REMOVIDO: botão "Ver README" -->
         <div class="header-actions">
-          <a
-            class="btn btn-ghost"
-            href="https://github.com/devandy36/localbiz-seo-auditor"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Ver README
-          </a>
-
           <a class="btn btn-primary" href="#audit">Iniciar auditoria</a>
         </div>
       </div>
@@ -78,7 +69,76 @@
 
       <section id="audit" class="card card-accent">
         <h2 class="card-title">Rodar auditoria</h2>
-        <p class="card-text muted">Exemplo: https:
+        <p class="card-text muted">Exemplo: https://www.seusite.com.br</p>
 
+        <form id="auditForm" class="form" novalidate>
+          <label class="label" for="urlInput">URL do site</label>
 
-  
+          <div class="field-row">
+            <input
+              id="urlInput"
+              name="url"
+              class="input"
+              type="url"
+              inputmode="url"
+              placeholder="https://..."
+              aria-describedby="urlHelp urlError"
+              required
+            />
+            <button id="auditButton" class="btn btn-primary" type="submit">Auditar</button>
+          </div>
+
+          <p id="urlHelp" class="help">
+            Dica: cole a URL completa com <strong>https://</strong>.
+          </p>
+
+          <p id="urlError" class="error" role="alert" hidden></p>
+
+          <div class="status" aria-live="polite" aria-atomic="true">
+            <span id="statusText" class="muted">Pronto para auditar.</span>
+          </div>
+        </form>
+
+        <div id="results" class="results" hidden>
+          <div class="results-header">
+            <h3 class="results-title">Resultado</h3>
+            <div class="pill" id="scorePill" aria-label="Pontuação do site">Score: --</div>
+          </div>
+
+          <div class="grid three-cols">
+            <div class="card mini">
+              <h4 class="mini-title">SEO Técnico</h4>
+              <p class="mini-text" id="seoSummary">—</p>
+            </div>
+
+            <div class="card mini">
+              <h4 class="mini-title">Acessibilidade</h4>
+              <p class="mini-text" id="a11ySummary">—</p>
+            </div>
+
+            <div class="card mini">
+              <h4 class="mini-title">Performance</h4>
+              <p class="mini-text" id="perfSummary">—</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4 class="card-title">Recomendações iniciais</h4>
+            <ul id="recoList" class="list"></ul>
+
+            <div class="actions">
+              <button id="resetBtn" class="btn btn-ghost" type="button">Nova auditoria</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p class="muted">VisiScan • Sprint 1 • Projeto de portfólio</p>
+      </footer>
+    </main>
+
+    <!-- JS (GitHub Pages OK) -->
+    <script type="module" src="./src/js/main.js"></script>
+  </body>
+</html>
